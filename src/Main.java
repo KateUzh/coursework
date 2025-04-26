@@ -1,5 +1,8 @@
 public class Main {
-    public static void initialEmployees() {
+
+    private final static Employee[] employees = new Employee[10];
+
+    public static void main(String[] args) {
         employees[0] = new Employee("Максим", "Иванович", "Иванов", 1,
                 50_850);
         employees[1] = new Employee("Анна", "Алексеевна", "Кулебяка", 2,
@@ -20,12 +23,6 @@ public class Main {
                 150_200);
         employees[9] = new Employee("Василий", "Андреевич", "Кулик", 5,
                 101_154);
-    }
-
-    private final static Employee[] employees = new Employee[10];
-
-    public static void main(String[] args) {
-        initialEmployees();
         printAllEmployees();
         System.out.println("\nСумма затрат на зарплату в месяц: " + sumAllSalaryPerMonth());
         System.out.println("\nСотрудник с минимальной зарплатой: " + findEmployeeWithMinSalary());
