@@ -22,7 +22,7 @@ public class Main {
         employees[8] = new Employee("Роман", "Дмитриевич", "Лусис", 4,
                 150_200);
         employees[9] = new Employee("Василий", "Андреевич", "Кулик", 5,
-                101_154);
+                101_150);
         printAllEmployees();
         System.out.println("\nСумма затрат на зарплату в месяц: " + sumAllSalaryPerMonth());
         System.out.println("\nСотрудник с минимальной зарплатой: " + findEmployeeWithMinSalary());
@@ -41,7 +41,9 @@ public class Main {
     public static double sumAllSalaryPerMonth() {
         double sum = 0;
         for (Employee employee : employees) {
-            sum += employee.getSalary();
+            if (employees != null) {
+                sum += employee.getSalary();
+            }
         }
         return sum;
     }
@@ -67,15 +69,25 @@ public class Main {
     }
 
     public static double calcAverageSalary() {
-        return sumAllSalaryPerMonth() / Employee.count;
+        int i = 0;
+        double sum = 0;
+        for (Employee employee : employees) {
+            if (employees != null) {
+                sum += employee.getSalary();
+                i++;
+            }
+        }
+        double calcAverageSalary = sum / i;
+        return calcAverageSalary;
     }
 
     public static void printEmployeesFullName() {
         System.out.println("\nФИО всех сотрудников:");
         for (Employee employee : employees) {
-            System.out.println(employee.getLastName() + " " + employee.getFirstName() + " " +
-                    employee.getMiddleName());
+            if (employees != null) {
+                System.out.println(employee.getLastName() + " " + employee.getFirstName() + " " +
+                        employee.getMiddleName());
+            }
         }
     }
-
 }

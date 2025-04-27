@@ -8,7 +8,7 @@ public class Employee {
     private double salary;
     private final int id;
 
-    public static int count;
+    private static int count;
 
     public Employee(String firstName, String middleName, String lastName, int department, double salary) {
         this.firstName = firstName;
@@ -55,8 +55,8 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Сотрудник " + lastName + " " + firstName + " " + middleName + ", отдел " + department + ", зарплата " +
-                salary + ", id " + id;
+        return lastName + " " + firstName + " " + middleName + ", отдел " + department + ", зарплата " +
+                salary + " руб, id " + id;
     }
 
     @Override
