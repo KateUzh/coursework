@@ -22,13 +22,26 @@ public class Main {
         employees[8] = new Employee("Роман", "Дмитриевич", "Лусис", 4,
                 150_200);
         employees[9] = new Employee("Василий", "Андреевич", "Кулик", 5,
-                101_154);
+                101_150);
         printAllEmployees();
-        System.out.println("\nСумма затрат на зарплату в месяц: " + sumAllSalaryPerMonth());
+        System.out.println("\nСумма затрат на зарплату в месяц: " + sumAllSalaryPerMonth() + " руб");
         System.out.println("\nСотрудник с минимальной зарплатой: " + findEmployeeWithMinSalary());
         System.out.println("\nСотрудник с максимальной зарплатой: " + findEmployeeWithMaxSalary());
-        System.out.println("\nСреднее значение зарплат составляет " + calcAverageSalary());
+        System.out.println("\nСреднее значение зарплат составляет " + calcAverageSalary() + " руб");
         printEmployeesFullName();
+        indexingSalary();
+        System.out.println("\nСотрудник с минимальной зарплатой в выбранном отделе "
+                + findEmployeeWithMinSalaryInDep());
+        System.out.println("\nСотрудник с максимальной зарплатой в выбранном отделе "
+                + findEmployeeWithMaxSalaryInDep());
+        System.out.println("\nСумма затрат на зарплату по " + selectedDepartment + " отделу составляет " +
+                sumAllSalaryInDep() + " руб");
+        System.out.println("\nСредняя зарплата по " + selectedDepartment + " отделу составляет " +
+                calcAverageSalaryInDep() + " руб");
+        indexingSalaryInDep();
+        printEmployeesInDep();
+        printEmployeesWithSmallSalary();
+        printEmployeesWithBigSalary();
     }
 
     public static void printAllEmployees() {
@@ -41,7 +54,9 @@ public class Main {
     public static double sumAllSalaryPerMonth() {
         double sum = 0;
         for (Employee employee : employees) {
-            sum += employee.getSalary();
+            if (employees != null) {
+                sum += employee.getSalary();
+            }
         }
         return sum;
     }
@@ -67,15 +82,125 @@ public class Main {
     }
 
     public static double calcAverageSalary() {
-        return sumAllSalaryPerMonth() / Employee.count;
+        int i = 0;
+        double sum = 0;
+        for (Employee employee : employees) {
+            if (employees != null) {
+                sum += employee.getSalary();
+                i++;
+            }
+        }
+        return sum / i;
     }
 
     public static void printEmployeesFullName() {
         System.out.println("\nФИО всех сотрудников:");
         for (Employee employee : employees) {
-            System.out.println(employee.getLastName() + " " + employee.getFirstName() + " " +
-                    employee.getMiddleName());
+            if (employees != null) {
+                System.out.println(employee.getLastName() + " " + employee.getFirstName() + " " +
+                        employee.getMiddleName());
+            }
         }
     }
 
+    public static void indexingSalary() {
+        double x = 15.5;
+        double index = x / 100;
+        for (Employee employee : employees) {
+            if (employees != null) {
+                employee.setSalary(employee.getSalary() * (index + 1));
+            }
+        }
+    }
+
+    public static int selectedDepartment = 4;
+
+    public static Employee findEmployeeWithMinSalaryInDep() {
+        Employee employeeWithMinSalaryInDep = null;
+        for (Employee employee : employees) {
+            if (selectedDepartment == employee.getDepartment() && (employeeWithMinSalaryInDep == null ||
+                    employeeWithMinSalaryInDep.getSalary() > employee.getSalary())) {
+                employeeWithMinSalaryInDep = employee;
+            }
+        }
+        return employeeWithMinSalaryInDep;
+    }
+
+    public static Employee findEmployeeWithMaxSalaryInDep() {
+        Employee employeeWithMaxSalaryInDep = null;
+        for (Employee employee : employees) {
+            if (selectedDepartment == employee.getDepartment() && (employeeWithMaxSalaryInDep == null ||
+                    employeeWithMaxSalaryInDep.getSalary() < employee.getSalary())) {
+                employeeWithMaxSalaryInDep = employee;
+            }
+        }
+        return employeeWithMaxSalaryInDep;
+    }
+
+    public static double sumAllSalaryInDep() {
+        double sum = 0;
+        for (Employee employee : employees) {
+            if ((employees != null) && (selectedDepartment == employee.getDepartment())) {
+                sum += employee.getSalary();
+            }
+        }
+        return sum;
+    }
+
+    public static double calcAverageSalaryInDep() {
+        int i = 0;
+        double sum = 0;
+        for (Employee employee : employees) {
+            if ((employees != null) && (selectedDepartment == employee.getDepartment())) {
+                sum += employee.getSalary();
+                i++;
+            }
+        }
+        return sum / i;
+    }
+
+    public static double indexationPercentage = 15.5;
+
+    public static void indexingSalaryInDep() {
+        double index = indexationPercentage / 100;
+        for (Employee employee : employees) {
+            if ((employees != null) && (selectedDepartment == employee.getDepartment())) {
+                employee.setSalary(employee.getSalary() * (index + 1));
+            }
+        }
+    }
+
+    public static void printEmployeesInDep() {
+        System.out.println("\nСотрудники " + selectedDepartment + " отдела: ");
+        for (Employee employee : employees) {
+            if ((employees != null) && (selectedDepartment == employee.getDepartment())) {
+                System.out.println(employee.getLastName() + " " + employee.getFirstName() + " " +
+                        employee.getMiddleName() + ", id " + employee.getId() + ", зарплата " + employee.getSalary());
+            }
+        }
+    }
+
+    public static double relativeSalary = 110_000;
+
+    public static void printEmployeesWithSmallSalary() {
+        System.out.println("\nСотрудники с зарплатой меньше " + relativeSalary + " руб:");
+        for (Employee employee : employees) {
+            if ((employees != null) && (relativeSalary > employee.getSalary())) {
+                System.out.println("id " + employee.getId() + ", " + employee.getLastName() + " " +
+                        employee.getFirstName() + " " + employee.getMiddleName() + ", зарплата " +
+                        employee.getSalary() + " руб");
+            }
+        }
+    }
+
+    public static void printEmployeesWithBigSalary() {
+        System.out.println("\nСотрудники с зарплатой больше " + relativeSalary + " руб:");
+        for (Employee employee : employees) {
+            if ((employees != null) && (relativeSalary <= employee.getSalary())) {
+                System.out.println("id " + employee.getId() + ", " + employee.getLastName() + " " +
+                        employee.getFirstName() + " " + employee.getMiddleName() + ", зарплата " +
+                        employee.getSalary() + " руб");
+            }
+        }
+    }
 }

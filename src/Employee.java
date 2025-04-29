@@ -75,7 +75,7 @@ public class Employee {
     }
 
     public static void printAllEmployees() {
-        System.out.println("Cписок всех сотрудников ");
+        System.out.println("Список всех сотрудников ");
         for (int i = 0; i < Employee.count; i++) {
             System.out.println(i);
         }
