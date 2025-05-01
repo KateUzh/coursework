@@ -29,19 +29,19 @@ public class Main {
         System.out.println("\nСотрудник с максимальной зарплатой: " + findEmployeeWithMaxSalary());
         System.out.println("\nСреднее значение зарплат составляет " + calcAverageSalary() + " руб");
         printEmployeesFullName();
-        indexingSalary();
+        indexingSalary(10);
         System.out.println("\nСотрудник с минимальной зарплатой в выбранном отделе "
-                + findEmployeeWithMinSalaryInDep());
+                + findEmployeeWithMinSalaryInDep(5));
         System.out.println("\nСотрудник с максимальной зарплатой в выбранном отделе "
-                + findEmployeeWithMaxSalaryInDep());
-        System.out.println("\nСумма затрат на зарплату по " + selectedDepartment + " отделу составляет " +
-                sumAllSalaryInDep() + " руб");
-        System.out.println("\nСредняя зарплата по " + selectedDepartment + " отделу составляет " +
-                calcAverageSalaryInDep() + " руб");
-        indexingSalaryInDep();
-        printEmployeesInDep();
-        printEmployeesWithSmallSalary();
-        printEmployeesWithBigSalary();
+                + findEmployeeWithMaxSalaryInDep(4));
+        System.out.println("\nСумма затрат на зарплату по отделу составляет " +
+                sumAllSalaryInDep(2) + " руб");
+        System.out.println("\nСредняя зарплата по отделу составляет " +
+                calcAverageSalaryInDep(1) + " руб");
+        indexingSalaryInDep(3, 13);
+        printEmployeesInDep(4);
+        printEmployeesWithSmallSalary(120_000);
+        printEmployeesWithBigSalary(100_000);
     }
 
     public static void printAllEmployees() {
@@ -103,9 +103,8 @@ public class Main {
         }
     }
 
-    public static void indexingSalary() {
-        double x = 15.5;
-        double index = x / 100;
+    public static void indexingSalary(double percent) {
+        double index = percent / 100;
         for (Employee employee : employees) {
             if (employees != null) {
                 employee.setSalary(employee.getSalary() * (index + 1));
@@ -113,12 +112,10 @@ public class Main {
         }
     }
 
-    public static int selectedDepartment = 4;
-
-    public static Employee findEmployeeWithMinSalaryInDep() {
+    public static Employee findEmployeeWithMinSalaryInDep(int department) {
         Employee employeeWithMinSalaryInDep = null;
         for (Employee employee : employees) {
-            if (selectedDepartment == employee.getDepartment() && (employeeWithMinSalaryInDep == null ||
+            if ((department == employee.getDepartment() && employee != null) && (employeeWithMinSalaryInDep == null ||
                     employeeWithMinSalaryInDep.getSalary() > employee.getSalary())) {
                 employeeWithMinSalaryInDep = employee;
             }
@@ -126,10 +123,10 @@ public class Main {
         return employeeWithMinSalaryInDep;
     }
 
-    public static Employee findEmployeeWithMaxSalaryInDep() {
+    public static Employee findEmployeeWithMaxSalaryInDep(int department) {
         Employee employeeWithMaxSalaryInDep = null;
         for (Employee employee : employees) {
-            if (selectedDepartment == employee.getDepartment() && (employeeWithMaxSalaryInDep == null ||
+            if ((department == employee.getDepartment() && employee != null) && (employeeWithMaxSalaryInDep == null ||
                     employeeWithMaxSalaryInDep.getSalary() < employee.getSalary())) {
                 employeeWithMaxSalaryInDep = employee;
             }
@@ -137,21 +134,21 @@ public class Main {
         return employeeWithMaxSalaryInDep;
     }
 
-    public static double sumAllSalaryInDep() {
+    public static double sumAllSalaryInDep(int department) {
         double sum = 0;
         for (Employee employee : employees) {
-            if ((employees != null) && (selectedDepartment == employee.getDepartment())) {
+            if ((employees != null) && (department == employee.getDepartment())) {
                 sum += employee.getSalary();
             }
         }
         return sum;
     }
 
-    public static double calcAverageSalaryInDep() {
+    public static double calcAverageSalaryInDep(int department) {
         int i = 0;
         double sum = 0;
         for (Employee employee : employees) {
-            if ((employees != null) && (selectedDepartment == employee.getDepartment())) {
+            if ((employees != null) && (department == employee.getDepartment())) {
                 sum += employee.getSalary();
                 i++;
             }
@@ -159,30 +156,26 @@ public class Main {
         return sum / i;
     }
 
-    public static double indexationPercentage = 15.5;
-
-    public static void indexingSalaryInDep() {
+    public static void indexingSalaryInDep(int department, double indexationPercentage) {
         double index = indexationPercentage / 100;
         for (Employee employee : employees) {
-            if ((employees != null) && (selectedDepartment == employee.getDepartment())) {
+            if ((employees != null) && (department == employee.getDepartment())) {
                 employee.setSalary(employee.getSalary() * (index + 1));
             }
         }
     }
 
-    public static void printEmployeesInDep() {
-        System.out.println("\nСотрудники " + selectedDepartment + " отдела: ");
+    public static void printEmployeesInDep(int department) {
+        System.out.println("\nСотрудники " + department + " отдела: ");
         for (Employee employee : employees) {
-            if ((employees != null) && (selectedDepartment == employee.getDepartment())) {
+            if ((employees != null) && (department == employee.getDepartment())) {
                 System.out.println(employee.getLastName() + " " + employee.getFirstName() + " " +
                         employee.getMiddleName() + ", id " + employee.getId() + ", зарплата " + employee.getSalary());
             }
         }
     }
 
-    public static double relativeSalary = 110_000;
-
-    public static void printEmployeesWithSmallSalary() {
+    public static void printEmployeesWithSmallSalary(double relativeSalary) {
         System.out.println("\nСотрудники с зарплатой меньше " + relativeSalary + " руб:");
         for (Employee employee : employees) {
             if ((employees != null) && (relativeSalary > employee.getSalary())) {
@@ -193,7 +186,7 @@ public class Main {
         }
     }
 
-    public static void printEmployeesWithBigSalary() {
+    public static void printEmployeesWithBigSalary(double relativeSalary) {
         System.out.println("\nСотрудники с зарплатой больше " + relativeSalary + " руб:");
         for (Employee employee : employees) {
             if ((employees != null) && (relativeSalary <= employee.getSalary())) {
