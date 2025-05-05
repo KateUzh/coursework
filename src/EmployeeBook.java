@@ -180,21 +180,21 @@ public class EmployeeBook {
         }
     }
 
-    public void addEmployee(String firstName, String middleName, String lastName, int department, double salary) {
-        for (int i = 0; i< employees.length; i++) {
+    public boolean addEmployee(Employee employee) {
+        for (int i = 0; i < employees.length; i++) {
             if (employees[i] == null) {
-                Employee newEmployee = new Employee(firstName, middleName, lastName, department, salary);
-                employees[i] = newEmployee;
+                employees[i] = employee;
+                return true;
             }
         }
+        return false;
     }
 
     public void removeEmployee(int id) {
         for (int i = 0; i< employees.length; i++) {
             if (employees[i] != null && id == employees[i].getId()) {
                 System.out.println("\nСотрудник с id " + id + " удалён");
-                System.arraycopy(employees, i+1, employees, i, employees.length - i- 1);
-                employees[employees.length - 1] = null;
+                employees[i] = null;
                 return;
             }
         }

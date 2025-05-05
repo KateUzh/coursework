@@ -24,8 +24,14 @@ public class Main {
 
         employeeBook.removeEmployee(8);
         employeeBook.printAllEmployees();
-        employeeBook.addEmployee("Екатерина", "Вадимовна", "Ужастина", 5,
-                50_000);
+        Employee employee = new Employee("Тест", "Тестович", "Тестов", 5,
+                55_555);
+
+        if (employeeBook.addEmployee(employee)){
+            System.out.println("\nСотрудник успешно добавлен");
+        } else {
+            System.out.println("\nСотрудник не добавлен");
+        }
         employeeBook.printAllEmployees();
         employeeBook.findEmployeeById(9);
     }
