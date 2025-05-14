@@ -34,6 +34,5 @@ public class Main {
         }
         employeeBook.printAllEmployees();
         employeeBook.findEmployeeById(9);
-
     }
 }
